@@ -6,8 +6,14 @@
   // Installs Ollama + llama3.2, uv and OpenCode. Runs once (and in prebuilds).
   "onCreateCommand": "bash .devcontainer/setup.sh",
 
-  // Starts the Ollama server every time the codespace starts.
-  "postStartCommand": "bash .devcontainer/start-ollama.sh",
+  // Starts the Ollama server and the agent's web page every time the codespace starts.
+  "postStartCommand": "bash .devcontainer/start-ollama.sh && bash .devcontainer/start-app.sh",
+
+  // The agent's web page (Streamlit) opens in a preview panel.
+  "forwardPorts": [8501],
+  "portsAttributes": {
+    "8501": { "label": "Agent", "onAutoForward": "openPreview" }
+  },
 
   "remoteEnv": {
     "PATH": "${containerEnv:PATH}:/home/vscode/.local/bin:/home/vscode/.opencode/bin"

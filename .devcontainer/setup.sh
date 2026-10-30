@@ -19,8 +19,8 @@ echo "==> Downloading llama3.2 (about 2 GB)"
 bash .devcontainer/start-ollama.sh
 ollama pull llama3.2
 
-echo "==> Pre-downloading the Python packages and the MCP fetch server used by the agent"
-uv run --with ollama --with tavily-python --with "mcp>=2" python -c "print('packages ready')"
+echo "==> Installing the Python packages used by the agent (pyproject.toml) and the MCP fetch server"
+uv sync
 uv tool install mcp-server-fetch
 
 echo "==> Setup complete"
