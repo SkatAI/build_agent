@@ -12,11 +12,11 @@ Create a free account on [github.com](https://github.com/signup). Nothing else t
 
 1. Click **Open in GitHub Codespaces** above, then **Create codespace**. Wait until the terminal at the bottom says `Setup complete` (a few minutes the first time).
 2. Check the model works: type `ollama run llama3.2`, ask it something, then type `/bye`.
-3. Start OpenCode: type `opencode`. Inside it, type `/connect`, choose **OpenRouter** and paste the key from your teacher. Type `/models` to pick the model your teacher names.
-4. For web search (step 7), run this in a second terminal, with the key from your teacher:
+3. Add the two keys your teacher gives you. Type this, then paste each key when asked (the key stays hidden while you paste):
    ```
-   echo 'export TAVILY_API_KEY=paste-the-key-here' >> ~/.bashrc && source ~/.bashrc
+   source .devcontainer/set-keys.sh
    ```
+4. Start OpenCode: type `opencode`. The provider (OpenRouter) and the model are already set in `opencode.json`.
 
 ## Follow along
 

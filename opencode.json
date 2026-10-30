@@ -1,0 +1,12 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "enabled_providers": ["openrouter"],
+  "model": "openrouter/anthropic/claude-sonnet-5.5",
+  "small_model": "openrouter/anthropic/claude-haiku-5.5",
+  "provider": {
+    "openrouter": {
+      "options": { "apiKey": "{env:OPENROUTER_API_KEY}" },
+      "whitelist": ["anthropic/claude-sonnet-5.5", "anthropic/claude-haiku-5.5"]
+    }
+  }
+}
