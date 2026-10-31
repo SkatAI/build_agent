@@ -15,7 +15,7 @@ Two small local models are available, picked in the sidebar: qwen2.5:3b (default
 
 The model is a function: text in, text out. It remembers nothing.
 
-```text
+```markdown
 Replace app.py with a chat page: a title, st.chat_input, and for each message, send ONLY that message to the model and show the question and the answer with st.chat_message. 
 Stream the answer so it appears as it is written: ollama.chat with stream=True, displayed with st.write_stream. 
 In the sidebar, add a selectbox to pick the model: "qwen2.5:3b" (default) or "llama3.2:3b". 
@@ -44,7 +44,7 @@ In the sidebar, show how many messages are sent and their approximate size in to
 
 The harness decides who the model is before the user says anything.
 
-```text
+```markdown
 Read the system prompt from system.md on every run and put it first in the messages list (do not show it in the chat). 
 Show it in the sidebar. 
 ```
@@ -57,7 +57,7 @@ Demo: ask a question, then add "Answer only in French." to system.md and send an
 
 Memory across sessions is a file the harness reads and writes, automatically.
 
-```text
+```markdown
 Remember the conversation automatically. 
 After each reply, append the new exchange to memory.md as plain text, one line per message: "User: ..." then "Agent: ...". 
 On every run, read memory.md and add it to the system prompt under "Previous conversations:". 
@@ -73,7 +73,7 @@ Demo: "Hi, I'm Alexis, I work in consulting and I prefer short answers.", reload
 
 The model can't act; it can only ask. The harness runs the function and sends back the result. This loop is what makes it an agent.
 
-```text
+```markdown
 Add tool calling. 
 Write a Python function get_current_datetime() with the docstring "Get today's date and the current time. Use only when the user asks about the date or time." and pass it to ollama.chat as a tool. 
 Implement the agent loop: if the reply contains tool calls, run each function, append the result as a "tool" message, and call the model again; repeat until the model replies with plain text. 
@@ -91,7 +91,7 @@ Demo: before this step, ask "What is today's date?" (it guesses or refuses). Aft
 
 Tools give the agent reach; the harness decides how far.
 
-```text
+```markdown
 Before calling a tool, drop any argument the function does not accept.
 Add three file tools, all restricted to the docs/ folder (refuse any path outside it):
 - list_files() lists the files in docs/
@@ -108,7 +108,7 @@ Demo: "Which files do I have?" first (small models guess file names otherwise), 
 
 The model's knowledge stops at its training date; search brings in current sources.
 
-```text
+```markdown
 Add a web_search(query) tool using the tavily-python library. 
 Read the key from the TAVILY_API_KEY environment variable; if it is missing, return "Web search is unavailable: TAVILY_API_KEY is not set."
 Call search with max_results=5 and include_answer=True. 
@@ -123,7 +123,7 @@ Demo: ask about something from this week, then open the tool result and compare 
 
 Instead of the harness saving every exchange, the model decides what is worth remembering, and when.
 
-```text
+```markdown
 Replace the automatic saving of the conversation with a remember(fact) tool.
 The fact argument is one short sentence, written by the model in its own words, that summarizes a lasting fact about the user. Never the user's message copied as is. Say this in the tool's docstring, since the model reads it.
 The tool appends that sentence as one line to memory.md, unless the same line is already there.
@@ -139,20 +139,37 @@ Demo: delete memory.md first (it still holds the raw conversations from step 4).
 
 Instead of writing each tool, plug in a server that offers ready-made ones over a standard protocol.
 
-```text
+```markdown
 Connect the agent to an MCP server with the official mcp Python SDK (version 2 or later: tool schemas are in tool.input_schema). The server is started with `uvx mcp-server-fetch` over stdio. Write one async function that starts the server and either lists its tools or calls one, and run it with asyncio.run. List the MCP tools once (st.cache_resource), convert them to Ollama tool definitions, and add them to the tools sent to the model. When the model calls an MCP tool, drop arguments whose value is None, then call it on the server. Show the MCP tools in the sidebar.
 ```
 
-Demo: "Fetch https://en.wikipedia.org/wiki/Large_language_model and summarize it in two sentences." No fetch code was written in app.py: the same server works in Claude, OpenCode or Cursor.
+**Demo**: 
+No fetch code was written in app.py: the same server works in Claude, OpenCode or Cursor.
+
+```
+Fetch the history section of that wikipedia page [https://en.wikipedia.org/wiki/Large_language_model](https://en.wikipedia.org/wiki/Large_language_model#History) and summarize it in a few sentences.
+```
+
 
 ### Step 10: Skills
 
 A skill is a written procedure the agent loads only when it needs it. The system prompt holds just the index.
 
-```text
-Add skills. Each skill is a folder in skills/ containing a SKILL.md that starts with a header between --- lines, giving a name and a one-line description. Add only the names and descriptions to the system prompt, and show them in the sidebar. Add a load_skill(name) tool that returns the full SKILL.md. Create skills/fact-check/SKILL.md: restate the claim, find two independent sources with web_search, give one line per source with its URL, then a verdict (TRUE, FALSE or UNVERIFIED). Never invent sources.
+```markdown
+Add skills. 
+Each skill is a folder in skills/ containing a SKILL.md that starts with a header between --- lines, giving a name and a one-line description. Add only the names and descriptions to the system prompt, and show them in the sidebar. 
+Add a load_skill(name) tool that returns the full SKILL.md. 
+Create skills/fact-check/SKILL.md: restate the claim, find two independent sources with web_search, give one line per source with its URL, then a verdict (TRUE, FALSE or UNVERIFIED). 
+Never invent sources.
 ```
 
-Demo: "Fact-check this claim: France is the most visited country in the world." Watch load_skill. Small models may load the skill and then skip web_search, citing sources from memory: compare the URLs with the tool results. Then write a second skill live, in plain English, with no code.
+**Demo**: 
+
+Watch load_skill. Small models may load the skill and then skip web_search, citing sources from memory: compare the URLs with the tool results. Then write a second skill live, in plain English, with no code.
+
+```
+Fact-check this claim: France is the most visited country in the world.
+```
+
 
 To close: switch to the other model and repeat a few earlier questions (the date, the files, the fact-check). Same harness, different model, different results. OpenCode, which wrote all of this, is the same kind of harness around a much larger model.
