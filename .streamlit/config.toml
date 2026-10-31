@@ -2,6 +2,8 @@
 headless = true
 # Reload the page by itself whenever app.py is saved (for example by OpenCode).
 runOnSave = true
+# Check app.py for changes by polling: more reliable than file-system events in Codespaces.
+fileWatcherType = "poll"
 port = 8804
 
 [client]
