@@ -2,3 +2,4 @@ __pycache__/
 memory.md
 .env
 .venv/
+.notes.md

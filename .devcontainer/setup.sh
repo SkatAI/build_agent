@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# One-time setup of the codespace: Ollama + llama3.2, uv, OpenCode.
+# One-time setup of the codespace: Ollama + qwen2.5:3b, uv, OpenCode.
 set -euo pipefail
 
 echo "==> Installing zstd (needed by the Ollama installer)"
@@ -15,9 +15,9 @@ export PATH="$HOME/.local/bin:$PATH"
 echo "==> Installing OpenCode"
 curl -fsSL https://opencode.ai/install | bash
 
-echo "==> Downloading llama3.2 (about 2 GB)"
+echo "==> Downloading qwen2.5:3b (about 2 GB)"
 bash .devcontainer/start-ollama.sh
-ollama pull llama3.2
+ollama pull qwen2.5:3b
 
 echo "==> Installing the Python packages used by the agent (pyproject.toml) and the MCP fetch server"
 uv sync

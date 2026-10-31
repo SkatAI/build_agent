@@ -1,6 +1,6 @@
 # Build an AI agent workshop, step by step
 
-We build a small AI agent around a local model (llama3.2, running with [Ollama](https://ollama.com)), adding one capability at a time: memory, tools, files, web search, MCP, skills. 
+We build a small AI agent around a local model (qwen2.5:3b, running with [Ollama](https://ollama.com)), adding one capability at a time: memory, tools, files, web search, MCP, skills. 
 
 You talk to the agent in a web page. The code is written live by [OpenCode](https://opencode.ai), an opensource coding agent.
 
@@ -38,7 +38,7 @@ For macOS or Linux, in a terminal (or your editor's terminal panel, for example 
    ```
    git clone https://github.com/SkatAI/build_agent.git
    cd build_agent
-   ollama pull llama3.2
+   ollama pull qwen2.5:3b
    uv sync
    ```
 3. Put the `.env` file your instructor gave you in the `build_agent` folder (or copy `.env.template` to `.env` and fill in the keys). Then start the agent's web page:
@@ -95,7 +95,7 @@ On Codespaces, stop your codespace to save your free hours: [github.com/codespac
 - OpenCode says "Missing Authentication header", or web search says the key is not set: the keys are missing. Check that `.env` is next to `app.py`, then run `bash .devcontainer/start-app.sh` and open a new terminal.
 - The page shows an error about Ollama: run `bash .devcontainer/start-ollama.sh`.
 - The answer is slow: the model runs on a CPU, without a GPU. Wait a few seconds.
-- The agent invents an answer instead of using a tool: llama3.2 is a small model. In step 11, run `ollama pull qwen2.5:3b` and pick it in the sidebar.
+- The agent invents an answer or picks the wrong tool: qwen2.5:3b is a small model and makes mistakes. Open the "Tool result" boxes to see what happened.
 
 ## For the instructor: giving participants the API keys
 

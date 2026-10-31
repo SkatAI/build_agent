@@ -12,7 +12,7 @@ Code
 - All dependencies (ollama, streamlit, tavily-python, mcp) are already installed from `pyproject.toml`. Do not add others.
 
 Models 
-- The model runs locally through Ollama, using the `ollama` Python library. `MODEL = "llama3.2"` is set at the top of the file.
+- The model runs locally through Ollama, using the `ollama` Python library. `MODEL = "qwen2.5:3b"` is set at the top of the file.
 - Chat display: `st.chat_message` and `st.chat_input`. 
 - From step 2, keep the conversation in `st.session_state.messages`, show it from there, and call `st.rerun()` after the agent replies.
 
