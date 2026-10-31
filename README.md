@@ -1,10 +1,14 @@
-# Build an AI agent, step by step
+# Build an AI agent workshop, step by step
 
-We build a small AI agent around a local model (llama3.2, running with Ollama), adding one capability at a time: memory, tools, files, web search, MCP, skills. You talk to the agent in a web page. The code is written live by OpenCode, a coding agent.
+We build a small AI agent around a local model (llama3.2, running with [Ollama](https://ollama.com)), adding one capability at a time: memory, tools, files, web search, MCP, skills. 
+
+You talk to the agent in a web page. The code is written live by [OpenCode](https://opencode.ai), an opensource coding agent.
+
+You can use your local environment if you are confortable with the terminal or work on github Codespaces
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/SkatAI/build_agent)
 
-## Before class
+## Before the workshop
 
 Create a free account on [github.com](https://github.com/signup). Nothing else to install: everything runs in your browser.
 
@@ -12,7 +16,7 @@ Create a free account on [github.com](https://github.com/signup). Nothing else t
 
 1. Click **Open in GitHub Codespaces** above, then **Create codespace**. Wait until the code editor appears.
 2. The agent's web page opens in a panel ("My agent: nothing here yet"). If it doesn't, open the **PORTS** tab at the bottom, find port 8501 ("Agent") and click the globe icon.
-3. Add the two keys your teacher gives you. In the terminal at the bottom, type this, then paste each key when asked (the key stays hidden while you paste):
+3. Add the two keys your instructor gives you. In the terminal at the bottom, type this, then paste each key when asked (the key stays hidden while you paste):
    ```
    source .devcontainer/set-keys.sh
    ```
