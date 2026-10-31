@@ -1,12 +1,18 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "enabled_providers": ["openrouter"],
-  "model": "openrouter/anthropic/claude-sonnet-5.5",
-  "small_model": "openrouter/anthropic/claude-haiku-5.5",
+  "model": "openrouter/z-ai/glm-5.3",
+  "small_model": "openrouter/deepseek/deepseek-v4.1-flash",
   "provider": {
     "openrouter": {
       "options": { "apiKey": "{env:OPENROUTER_API_KEY}" },
-      "whitelist": ["anthropic/claude-sonnet-5.5", "anthropic/claude-haiku-5.5"]
+      "whitelist": [
+        "z-ai/glm-5.3",
+        "deepseek/deepseek-v4.1-flash",
+        "moonshotai/kimi-k3",
+        "mistralai/mistral-large-4-0",
+        "qwen/qwen3.8-27b"
+      ]
     }
   }
 }
