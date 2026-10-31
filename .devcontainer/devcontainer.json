@@ -9,10 +9,10 @@
   // Starts the Ollama server and the agent's web page every time the codespace starts.
   "postStartCommand": "bash .devcontainer/start-ollama.sh && bash .devcontainer/start-app.sh",
 
-  // The agent's web page (Streamlit) opens in a preview panel.
+  // The agent's web page (Streamlit) opens in a new browser tab.
   "forwardPorts": [8804],
   "portsAttributes": {
-    "8804": { "label": "Agent", "onAutoForward": "openPreview" }
+    "8804": { "label": "Agent", "onAutoForward": "openBrowser" }
   },
 
   "remoteEnv": {
