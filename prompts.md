@@ -4,7 +4,7 @@ One prompt per step, each adding one capability to `app.py`: a web page where yo
 
 ## Setup
 
-1. Open the codespace (see README). The agent's page runs on port 8501 and reloads by itself each time `app.py` is saved. OpenCode reads `AGENTS.md` automatically: it holds the rules for every step.
+1. Open the codespace, or run it on your computer (see README). The agent's page runs on port 8501 and reloads by itself each time `app.py` is saved. OpenCode reads `AGENTS.md` automatically: it holds the rules for every step.
 2. Paste one prompt per step into OpenCode, then talk to the agent in the web page.
 3. If a step goes wrong, `git checkout -f step-N` loads the tested version of that step.
 
@@ -37,7 +37,7 @@ Demo: the name question now works. Watch the size grow in the sidebar: that is t
 The harness decides who the model is before the user says anything.
 
 ```text
-Read a system prompt from system.md on every run and put it first in the messages list (do not show it in the chat). Show it in the sidebar. Create system.md with: "You are a research assistant for Sciences Po students. Answer in 3 sentences or fewer. Say when you don't know."
+Read a system prompt from system.md on every run and put it first in the messages list (do not show it in the chat). Show it in the sidebar. Create system.md with: "You are a research assistant. Answer in 3 sentences or fewer. Say when you don't know."
 ```
 
 Demo: ask a question, then add "Answer only in French." to system.md and send another message: no reload needed.
@@ -50,7 +50,7 @@ Memory across sessions is a file the harness reads and writes.
 Add memory that survives page reloads. Add a "Save memory" button in the sidebar: it asks the model to list the lasting facts about the user as bullet points and saves them to memory.md. On every run, read memory.md and add its content to the system prompt. Show memory.md in the sidebar.
 ```
 
-Demo: "Hi, I'm Alexis, I teach at Sciences Po and I prefer short answers.", click Save memory, reload the page, "What do you know about me?". Open memory.md: plain text anyone can read or edit.
+Demo: "Hi, I'm Alexis, I work in consulting and I prefer short answers.", click Save memory, reload the page, "What do you know about me?". Open memory.md: plain text anyone can read or edit.
 
 ## Part 2: Tools
 
@@ -112,7 +112,7 @@ Instead of writing each tool, plug in a server that offers ready-made ones over 
 Connect the agent to an MCP server with the official mcp Python SDK (version 2 or later: tool schemas are in tool.input_schema). The server is started with `uvx mcp-server-fetch` over stdio. Write one async function that starts the server and either lists its tools or calls one, and run it with asyncio.run. List the MCP tools once (st.cache_resource), convert them to Ollama tool definitions, and add them to the tools sent to the model. When the model calls an MCP tool, drop arguments whose value is None, then call it on the server. Show the MCP tools in the sidebar.
 ```
 
-Demo: "Fetch https://www.sciencespo.fr and tell me what is on the front page." No fetch code was written in app.py: the same server works in Claude, OpenCode or Cursor.
+Demo: "Fetch https://en.wikipedia.org/wiki/Large_language_model and summarize it in two sentences." No fetch code was written in app.py: the same server works in Claude, OpenCode or Cursor.
 
 ### Step 10: Skills
 

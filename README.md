@@ -10,9 +10,10 @@ You can use your local environment if you are confortable with the terminal or w
 
 ## Before the workshop
 
-Create a free account on [github.com](https://github.com/signup). Nothing else to install: everything runs in your browser.
+- **Codespaces**: create a free account on [github.com](https://github.com/signup). Nothing else to install: everything runs in your browser.
+- **Your computer**: follow [Run on your computer](#run-on-your-computer) below.
 
-## Start
+## Start (Codespaces)
 
 1. Click **Open in GitHub Codespaces** above, then **Create codespace**. Wait until the code editor appears.
 2. The agent's web page opens in a panel ("My agent: nothing here yet"). If it doesn't, open the **PORTS** tab at the bottom, find port 8501 ("Agent") and click the globe icon.
@@ -21,6 +22,32 @@ Create a free account on [github.com](https://github.com/signup). Nothing else t
    source .devcontainer/set-keys.sh
    ```
 4. Start OpenCode: type `opencode` in the terminal. The provider (OpenRouter) and the model are already set in `opencode.json`.
+
+## Run on your computer
+
+For macOS or Linux, in a terminal (or your editor's terminal panel, for example in Zed). You need git, and about 3 GB of free disk space.
+
+1. Install the tools, skipping those you already have:
+   - Ollama: download and start the app from [ollama.com/download](https://ollama.com/download)
+   - uv (Python manager, it installs Python by itself): `curl -LsSf https://astral.sh/uv/install.sh | sh`
+   - OpenCode: `curl -fsSL https://opencode.ai/install | bash`
+
+   Then open a new terminal so the new commands are found.
+2. Get the code, the model and the Python packages:
+   ```
+   git clone https://github.com/SkatAI/build_agent.git
+   cd build_agent
+   ollama pull llama3.2
+   uv sync
+   ```
+3. Add the two keys your instructor gives you. This also starts the agent's web page:
+   ```
+   source .devcontainer/set-keys.sh
+   ```
+   Open [http://localhost:8501](http://localhost:8501) in your browser ("My agent: nothing here yet").
+4. Start OpenCode in the same terminal: `opencode`. To read the code while you work, open the folder in your editor (`zed .` for Zed).
+
+The page keeps running in the background. To stop it: `kill $(cat /tmp/streamlit.pid)`. To start it again: `bash .devcontainer/start-app.sh`. Its log is in `/tmp/streamlit.log`.
 
 ## Follow along
 
@@ -52,9 +79,9 @@ git checkout -f step-5
 
 The web page updates by itself. Go back to the start with `git checkout -f main`.
 
-## After class
+## After the workshop
 
-Stop your codespace to save your free hours: [github.com/codespaces](https://github.com/codespaces) → `...` → **Stop codespace**.
+On Codespaces, stop your codespace to save your free hours: [github.com/codespaces](https://github.com/codespaces) → `...` → **Stop codespace**.
 
 ## Troubleshooting
 
