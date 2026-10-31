@@ -3,7 +3,7 @@
   "image": "mcr.microsoft.com/devcontainers/python:3.12",
   "hostRequirements": { "cpus": 4, "memory": "16gb" },
 
-  // Installs Ollama + qwen2.5:3b, uv and OpenCode. Runs once (and in prebuilds).
+  // Installs Ollama + qwen2.5:3b and llama3.2:3b, uv and OpenCode. Runs once (and in prebuilds).
   "onCreateCommand": "bash .devcontainer/setup.sh",
 
   // Starts the Ollama server and the agent's web page every time the codespace starts.

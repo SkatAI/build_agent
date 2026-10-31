@@ -1,6 +1,6 @@
 # Build an AI agent workshop, step by step
 
-We build a small AI agent around a local model (qwen2.5:3b, running with [Ollama](https://ollama.com)), adding one capability at a time: memory, tools, files, web search, MCP, skills. 
+We build a small AI agent around a local model (qwen2.5:3b or llama3.2:3b, running with [Ollama](https://ollama.com)), adding one capability at a time: memory, tools, files, web search, MCP, skills. 
 
 You talk to the agent in a web page. The code is written live by [OpenCode](https://opencode.ai), an opensource coding agent.
 
@@ -30,7 +30,7 @@ You can use your local environment if you are confortable with the terminal or w
 
 ## Run on your computer
 
-For macOS or Linux, in a terminal (or your editor's terminal panel, for example in Zed). You need git, and about 3 GB of free disk space.
+For macOS or Linux, in a terminal (or your editor's terminal panel, for example in Zed). You need git, and about 5 GB of free disk space.
 
 1. Install the tools, skipping those you already have:
    - Ollama: download and start the app from [ollama.com/download](https://ollama.com/download)
@@ -43,6 +43,7 @@ For macOS or Linux, in a terminal (or your editor's terminal panel, for example 
    git clone https://github.com/SkatAI/build_agent.git
    cd build_agent
    ollama pull qwen2.5:3b
+   ollama pull llama3.2:3b
    uv sync
    ```
 3. Put the `.env` file your instructor gave you in the `build_agent` folder (or copy `.env.template` to `.env` and fill in the keys). Then start the agent's web page:
@@ -65,7 +66,7 @@ In the terminal (Codespaces or your computer), from the `build_agent` folder:
 
 | Type | You should see |
 |---|---|
-| `ollama list` | a line starting with `qwen2.5:3b` |
+| `ollama list` | two lines, starting with `qwen2.5:3b` and `llama3.2:3b` |
 | `uv --version` | `uv` followed by a version number |
 | `opencode --version` | a version number |
 | `curl -s localhost:8804/_stcore/health` | `ok` (the agent's page is running) |
@@ -79,7 +80,7 @@ The prompts for each step are in [prompts.md](prompts.md). Paste a prompt into O
 
 | Step | Adds | What it shows |
 |---|---|---|
-| 1 | Chat page | The model remembers nothing |
+| 1 | Chat page, model choice | The model remembers nothing |
 | 2 | Conversation history | "Memory" in a chat is the history being resent |
 | 3 | System prompt (`system.md`) | The harness sets the model's behaviour |
 | 4 | `memory.md` | Memory across sessions is a file |
@@ -89,7 +90,6 @@ The prompts for each step are in [prompts.md](prompts.md). Paste a prompt into O
 | 8 | `remember` tool | The model decides what to remember |
 | 9 | MCP server (fetch) | Ready-made tools over a standard protocol |
 | 10 | Skills (`skills/`) | Instructions loaded only when needed |
-| 11 | Model choice | Same harness, different model |
 
 Grey `[harness]` lines and "Tool result" boxes show what the program around the model does. The sidebar shows what is sent to the model.
 
@@ -103,7 +103,7 @@ On Codespaces, stop your codespace to save your free hours: [github.com/codespac
 - OpenCode says "Missing Authentication header", or web search says the key is not set: the keys are missing. Check that `.env` is next to `app.py`, then run `bash .devcontainer/start-app.sh` and open a new terminal.
 - The page shows an error about Ollama: run `bash .devcontainer/start-ollama.sh`.
 - The answer is slow: the model runs on a CPU, without a GPU. Wait a few seconds.
-- The agent invents an answer or picks the wrong tool: qwen2.5:3b is a small model and makes mistakes. Open the "Tool result" boxes to see what happened.
+- The agent invents an answer or picks the wrong tool: the models are small and make mistakes. Open the "Tool result" boxes to see what happened, or try the other model in the sidebar.
 
 ## For the instructor: giving participants the API keys
 

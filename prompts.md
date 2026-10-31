@@ -1,13 +1,13 @@
 # Building a local agent: OpenCode prompts
 
-One prompt per step, each adding one capability to `app.py`: a web page where you talk to an agent that runs on qwen2.5:3b through Ollama. OpenCode (with a cloud model) writes the code; the agent itself runs locally, except web search in step 7.
+One prompt per step, each adding one capability to `app.py`: a web page where you talk to an agent that runs on a small local model (qwen2.5:3b or llama3.2:3b) through Ollama. OpenCode (with a cloud model) writes the code; the agent itself runs locally, except web search in step 7.
 
 ## Setup
 
 1. Open the codespace, or run it on your computer (see README). The agent's page runs on port 8804 and reloads by itself each time `app.py` is saved. OpenCode reads `AGENTS.md` automatically: it holds the rules for every step.
 2. Paste one prompt per step into OpenCode, then talk to the agent in the web page.
 
-qwen2.5:3b is a small model. It handles tools well enough for the demos, but it still makes mistakes: an unneeded tool call, a wrong argument, an invented source. These mistakes are worth showing.
+Two small local models are available, picked in the sidebar: qwen2.5:3b (default) handles tools well enough for the demos; llama3.2:3b is chattier but often picks the wrong tool. Both make mistakes (an unneeded tool call, a wrong argument, an invented source), and these mistakes are worth showing. Switch models at any step to compare.
 
 ## Part 1: Memory
 
@@ -18,10 +18,11 @@ The model is a function: text in, text out. It remembers nothing.
 ```text
 Replace app.py with a chat page: a title, st.chat_input, and for each message, send ONLY that message to the model and show the question and the answer with st.chat_message. 
 Stream the answer so it appears as it is written: ollama.chat with stream=True, displayed with st.write_stream. 
+In the sidebar, add a selectbox to pick the model: "qwen2.5:3b" (default) or "llama3.2:3b". 
 Keep no history.
 ```
 
-**Demo**: "My name is Alexis." then "What is my name?". It doesn't know, and the previous exchange disappears from the page: Streamlit reruns the whole file for each message.
+**Demo**: "My name is Alexis." then "What is my name?". It doesn't know, and the previous exchange disappears from the page: Streamlit reruns the whole file for each message. Then switch the model in the sidebar and ask the same question: same code, a different answer.
 
 ### Step 2: Conversation history
 
@@ -101,7 +102,7 @@ Show the files in docs/ in the sidebar.
 
 `docs/` already holds two sample files that contradict each other.
 
-Demo: "Which files do I have?" first (qwen2.5:3b guesses file names otherwise), then "Do the press release and the interview notes agree on the budget?", then "Save a two-line summary of the contradiction to summary.md" with the toggle off, then on.
+Demo: "Which files do I have?" first (small models guess file names otherwise), then "Do the press release and the interview notes agree on the budget?", then "Save a two-line summary of the contradiction to summary.md" with the toggle off, then on.
 
 ### Step 7: Web search
 
@@ -154,12 +155,4 @@ Add skills. Each skill is a folder in skills/ containing a SKILL.md that starts 
 
 Demo: "Fact-check this claim: France is the most visited country in the world." Watch load_skill. Small models may load the skill and then skip web_search, citing sources from memory: compare the URLs with the tool results. Then write a second skill live, in plain English, with no code.
 
-### Step 11: Same harness, different model
-
-The harness stays; the model is a swappable part.
-
-```text
-Replace the fixed MODEL with a selectbox in the sidebar listing the models downloaded in Ollama (ollama.list()), with qwen2.5:3b selected by default.
-```
-
-Demo: download a second model with `ollama pull <name>` (to be chosen), reload the page, pick it, and repeat a few earlier questions (the date, the files, the fact-check). Compare the tool calls and the answers. Close by noting that OpenCode, which wrote all of this, is the same kind of harness around a much larger model.
+To close: switch to the other model and repeat a few earlier questions (the date, the files, the fact-check). Same harness, different model, different results. OpenCode, which wrote all of this, is the same kind of harness around a much larger model.
