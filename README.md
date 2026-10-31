@@ -16,7 +16,7 @@ You can use your local environment if you are confortable with the terminal or w
 ## Start (Codespaces)
 
 1. Click **Open in GitHub Codespaces** above, then **Create codespace**. Wait until the code editor appears.
-2. The agent's web page opens in a panel ("My agent: nothing here yet"). If it doesn't, open the **PORTS** tab at the bottom, find port 8501 ("Agent") and click the globe icon.
+2. The agent's web page opens in a panel ("My agent: nothing here yet"). If it doesn't, open the **PORTS** tab at the bottom, find port 8804 ("Agent") and click the globe icon.
 3. API keys: if your instructor added you to the repository, they are already set, skip to step 4. Otherwise, drag the `.env` file your instructor gave you into the file list on the left (next to `app.py`), then type in the terminal at the bottom:
    ```
    bash .devcontainer/start-app.sh
@@ -45,7 +45,7 @@ For macOS or Linux, in a terminal (or your editor's terminal panel, for example 
    ```
    bash .devcontainer/start-app.sh
    ```
-   Open [http://localhost:8501](http://localhost:8501) in your browser ("My agent: nothing here yet").
+   Open [http://localhost:8804](http://localhost:8804) in your browser ("My agent: nothing here yet").
 4. Load the keys in your terminal, then start OpenCode:
    ```
    source .devcontainer/load-env.sh

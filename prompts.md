@@ -4,7 +4,7 @@ One prompt per step, each adding one capability to `app.py`: a web page where yo
 
 ## Setup
 
-1. Open the codespace, or run it on your computer (see README). The agent's page runs on port 8501 and reloads by itself each time `app.py` is saved. OpenCode reads `AGENTS.md` automatically: it holds the rules for every step.
+1. Open the codespace, or run it on your computer (see README). The agent's page runs on port 8804 and reloads by itself each time `app.py` is saved. OpenCode reads `AGENTS.md` automatically: it holds the rules for every step.
 2. Paste one prompt per step into OpenCode, then talk to the agent in the web page.
 3. If a step goes wrong, `git checkout -f step-N` loads the tested version of that step.
 

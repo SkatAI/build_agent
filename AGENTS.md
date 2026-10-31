@@ -5,7 +5,7 @@ Context
 - Participants have a humanities background and have never coded. They do not have experience in computer science.  
 
 Code
-- The agent is a Streamlit web page in one file, `app.py`. It is already running on port 8501 and reloads by itself when `app.py` is saved. 
+- The agent is a Streamlit web page in one file, `app.py`. It is already running on port 8804 and reloads by itself when `app.py` is saved. 
 - Never start, stop or restart Streamlit.
 - Keep the code simple and short. Short functions, no classes.
 - This is demo code no need for production complexity.

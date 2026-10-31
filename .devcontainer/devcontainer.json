@@ -10,9 +10,9 @@
   "postStartCommand": "bash .devcontainer/start-ollama.sh && bash .devcontainer/start-app.sh",
 
   // The agent's web page (Streamlit) opens in a preview panel.
-  "forwardPorts": [8501],
+  "forwardPorts": [8804],
   "portsAttributes": {
-    "8501": { "label": "Agent", "onAutoForward": "openPreview" }
+    "8804": { "label": "Agent", "onAutoForward": "openPreview" }
   },
 
   "remoteEnv": {

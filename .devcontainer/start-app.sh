@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# (Re)start the agent's web page (Streamlit, port 8501) in the background, with the keys from .env.
+# (Re)start the agent's web page (Streamlit, port 8804) in the background, with the keys from .env.
 # It reloads by itself whenever app.py changes. Works in Codespaces, on macOS and on Linux.
 export PATH="$HOME/.local/bin:$PATH"
 cd "$(dirname "$0")/.."
@@ -15,7 +15,7 @@ $LAUNCH .venv/bin/streamlit run app.py > /tmp/streamlit.log 2>&1 < /dev/null &
 echo $! > /tmp/streamlit.pid
 
 for _ in $(seq 1 60); do
-  curl -s http://localhost:8501/_stcore/health > /dev/null && echo "Agent page running: http://localhost:8501" && exit 0
+  curl -s http://localhost:8804/_stcore/health > /dev/null && echo "Agent page running: http://localhost:8804" && exit 0
   sleep 1
 done
 echo "The agent page did not start; see /tmp/streamlit.log" && exit 1

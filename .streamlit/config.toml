@@ -2,7 +2,7 @@
 headless = true
 # Reload the page by itself whenever app.py is saved (for example by OpenCode).
 runOnSave = true
-port = 8501
+port = 8804
 
 [client]
 toolbarMode = "minimal"
