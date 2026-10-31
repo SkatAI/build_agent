@@ -23,4 +23,7 @@ echo "==> Installing the Python packages used by the agent (pyproject.toml) and 
 uv sync
 uv tool install mcp-server-fetch
 
+echo "==> Loading the API keys from .env in every new terminal (for OpenCode)"
+echo "source \"$PWD/.devcontainer/load-env.sh\" \"$PWD\"" >> ~/.bashrc
+
 echo "==> Setup complete"

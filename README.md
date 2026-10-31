@@ -17,10 +17,11 @@ You can use your local environment if you are confortable with the terminal or w
 
 1. Click **Open in GitHub Codespaces** above, then **Create codespace**. Wait until the code editor appears.
 2. The agent's web page opens in a panel ("My agent: nothing here yet"). If it doesn't, open the **PORTS** tab at the bottom, find port 8501 ("Agent") and click the globe icon.
-3. Add the two keys your instructor gives you. In the terminal at the bottom, type this, then paste each key when asked (the key stays hidden while you paste):
+3. API keys: if your instructor added you to the repository, they are already set, skip to step 4. Otherwise, drag the `.env` file your instructor gave you into the file list on the left (next to `app.py`), then type in the terminal at the bottom:
    ```
-   source .devcontainer/set-keys.sh
+   bash .devcontainer/start-app.sh
    ```
+   and open a new terminal (**+** in the terminal panel), so the keys are loaded there too.
 4. Start OpenCode: type `opencode` in the terminal. The provider (OpenRouter) and the model are already set in `opencode.json`.
 
 ## Run on your computer
@@ -40,14 +41,19 @@ For macOS or Linux, in a terminal (or your editor's terminal panel, for example 
    ollama pull llama3.2
    uv sync
    ```
-3. Add the two keys your instructor gives you. This also starts the agent's web page:
+3. Put the `.env` file your instructor gave you in the `build_agent` folder (or copy `.env.template` to `.env` and fill in the keys). Then start the agent's web page:
    ```
-   source .devcontainer/set-keys.sh
+   bash .devcontainer/start-app.sh
    ```
    Open [http://localhost:8501](http://localhost:8501) in your browser ("My agent: nothing here yet").
-4. Start OpenCode in the same terminal: `opencode`. To read the code while you work, open the folder in your editor (`zed .` for Zed).
+4. Load the keys in your terminal, then start OpenCode:
+   ```
+   source .devcontainer/load-env.sh
+   opencode
+   ```
+   To read the code while you work, open the folder in your editor (`zed .` for Zed).
 
-The page keeps running in the background. To stop it: `kill $(cat /tmp/streamlit.pid)`. To start it again: `bash .devcontainer/start-app.sh`. Its log is in `/tmp/streamlit.log`.
+The page keeps running in the background. To stop it: `kill $(cat /tmp/streamlit.pid)`. To restart it (for example after changing `.env`): `bash .devcontainer/start-app.sh`. Its log is in `/tmp/streamlit.log`.
 
 ## Follow along
 
@@ -86,6 +92,16 @@ On Codespaces, stop your codespace to save your free hours: [github.com/codespac
 ## Troubleshooting
 
 - The web page is blank or says "connection refused": run `bash .devcontainer/start-app.sh`.
+- OpenCode says "Missing Authentication header", or web search says the key is not set: the keys are missing. Check that `.env` is next to `app.py`, then run `bash .devcontainer/start-app.sh` and open a new terminal.
 - The page shows an error about Ollama: run `bash .devcontainer/start-ollama.sh`.
 - The answer is slow: the model runs on a CPU, without a GPU. Wait a few seconds.
 - The agent invents an answer instead of using a tool: llama3.2 is a small model. In step 11, run `ollama pull qwen2.5:3b` and pick it in the sidebar.
+
+## For the instructor: giving participants the API keys
+
+Two options:
+
+- **No action for participants**: make the repository private, invite each participant as a collaborator (Settings → Collaborators; they need a GitHub account and must accept the invitation), and add `OPENROUTER_API_KEY` and `TAVILY_API_KEY` under Settings → Secrets and variables → **Codespaces** → New repository secret. GitHub gives these secrets only to people with write access, which collaborators have. Collaborators can also push to the repository.
+- **Share a `.env` file**: copy `.env.template` to `.env`, fill in the keys and send the file. Participants drop it into their codespace or project folder (see above). `.env` is ignored by git, so it is never published.
+
+Codespaces usage on a repository owned by a personal account is billed to each participant's own free quota, whether the repository is public or private.
