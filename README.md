@@ -16,13 +16,17 @@ You can use your local environment if you are confortable with the terminal or w
 ## Start (Codespaces)
 
 1. Click **Open in GitHub Codespaces** above, then **Create codespace**. Wait until the code editor appears.
-2. The agent's web page opens in a panel ("My agent: nothing here yet"). If it doesn't, open the **PORTS** tab at the bottom, find port 8804 ("Agent") and click the globe icon.
+2. The agent's web page opens in a panel. If the panel says "Firefox Can't Open This Page" or "refused to connect" (GitHub blocks the page inside the editor), click the arrow icon at the top right of the panel to open it in a new browser tab. You should see "My agent: nothing here yet". If no panel opens, go to the **PORTS** tab at the bottom, find port 8804 ("Agent") and click the globe icon.
 3. API keys: if your instructor added you to the repository, they are already set, skip to step 4. Otherwise, drag the `.env` file your instructor gave you into the file list on the left (next to `app.py`), then type in the terminal at the bottom:
    ```
    bash .devcontainer/start-app.sh
    ```
-   and open a new terminal (**+** in the terminal panel), so the keys are loaded there too.
-4. Start OpenCode: type `opencode` in the terminal. The provider (OpenRouter) and the model are already set in `opencode.json`.
+4. Load the keys in the terminal, then start OpenCode:
+   ```
+   source .devcontainer/load-env.sh
+   opencode
+   ```
+   OpenCode does not read `.env` by itself: without the first line, it shows "Missing Authentication header". The provider (OpenRouter) and the model are already set in `opencode.json`.
 
 ## Run on your computer
 
@@ -54,6 +58,20 @@ For macOS or Linux, in a terminal (or your editor's terminal panel, for example 
    To read the code while you work, open the folder in your editor (`zed .` for Zed).
 
 The page keeps running in the background. To stop it: `kill $(cat /tmp/streamlit.pid)`. To restart it (for example after changing `.env`): `bash .devcontainer/start-app.sh`. Its log is in `/tmp/streamlit.log`.
+
+## Check that everything is installed
+
+In the terminal (Codespaces or your computer), from the `build_agent` folder:
+
+| Type | You should see |
+|---|---|
+| `ollama list` | a line starting with `qwen2.5:3b` |
+| `uv --version` | `uv` followed by a version number |
+| `opencode --version` | a version number |
+| `curl -s localhost:8804/_stcore/health` | `ok` (the agent's page is running) |
+| `source .devcontainer/load-env.sh; echo ${OPENROUTER_API_KEY:0:8}` | `sk-or-v1` (the OpenRouter key is loaded) |
+
+If one of them fails, see [Troubleshooting](#troubleshooting).
 
 ## Follow along
 
