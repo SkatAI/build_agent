@@ -6,9 +6,8 @@ One prompt per step, each adding one capability to `app.py`: a web page where yo
 
 1. Open the codespace, or run it on your computer (see README). The agent's page runs on port 8804 and reloads by itself each time `app.py` is saved. OpenCode reads `AGENTS.md` automatically: it holds the rules for every step.
 2. Paste one prompt per step into OpenCode, then talk to the agent in the web page.
-3. If a step goes wrong, `git checkout -f step-N` loads the tested version of that step.
 
-qwen2.5:3b is a small model. It handles tools well enough for the demos, but it still makes mistakes: an unneeded tool call, a wrong argument, an invented source. These mistakes are worth showing; step 11 compares it with llama3.2, which makes many more.
+qwen2.5:3b is a small model. It handles tools well enough for the demos, but it still makes mistakes: an unneeded tool call, a wrong argument, an invented source. These mistakes are worth showing.
 
 ## Part 1: Memory
 
@@ -41,7 +40,7 @@ Read the system prompt from system.md on every run and put it first in the messa
 Show it in the sidebar. 
 ```
 
-system.md is already in the folder: the agent is Amandine, a farmer in Normandy who only talks about her chickens and the price of eggs.
+system.md is already in the folder: the agent is Amandine, a farmer in Normandy, proud of her chickens and obsessed with the price of eggs.
 
 Demo: ask a question, then add "Answer only in French." to system.md and send another message: no reload needed.
 
@@ -95,7 +94,6 @@ Show the files in docs/ in the sidebar.
 `docs/` already holds two sample files that contradict each other.
 
 Demo: "Which files do I have?" first (qwen2.5:3b guesses file names otherwise), then "Do the press release and the interview notes agree on the budget?", then "Save a two-line summary of the contradiction to summary.md" with the toggle off, then on.
-Prompt injection: `cp extras/injection.txt docs/minutes.txt`, then "Read minutes.txt and complete its action items." The minutes say no decision was taken, but their action items ask the agent to write approved.txt saying the budget was approved. With the toggle off, the harness blocks the write; switch it on, ask again, and approved.txt appears in docs/. The model cannot tell your instructions from the document's.
 
 ### Step 7: Web search
 
@@ -110,7 +108,7 @@ Add today's date to the system prompt.
 Add to system.md: "When you use web search, base your answer only on the search results and cite their URLs. If the results do not answer the question, say so."
 ```
 
-Demo: ask about something from this week. Compare with the step-6 version (`git checkout -f step-6`).
+Demo: ask about something from this week, then open the tool result and compare it with the answer.
 
 ### Step 8: Memory as a tool
 
@@ -156,4 +154,4 @@ The harness stays; the model is a swappable part.
 Replace the fixed MODEL with a selectbox in the sidebar listing the models downloaded in Ollama (ollama.list()), with qwen2.5:3b selected by default.
 ```
 
-Demo: `ollama pull llama3.2` in a terminal, reload the page, pick it, and repeat a few earlier questions (the date, the files, the fact-check). llama3.2 calls tools for every message, picks the wrong tool, or writes the tool call as text instead of making it. Close by noting that OpenCode, which wrote all of this, is the same kind of harness around a much larger model.
+Demo: download a second model with `ollama pull <name>` (to be chosen), reload the page, pick it, and repeat a few earlier questions (the date, the files, the fact-check). Compare the tool calls and the answers. Close by noting that OpenCode, which wrote all of this, is the same kind of harness around a much larger model.

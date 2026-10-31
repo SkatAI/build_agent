@@ -75,16 +75,6 @@ The prompts for each step are in [prompts.md](prompts.md). Paste a prompt into O
 
 Grey `[harness]` lines and "Tool result" boxes show what the program around the model does. The sidebar shows what is sent to the model.
 
-## Lost? Jump to any step
-
-Every step has a working version. To load it (this replaces your files), type in a terminal:
-
-```
-git checkout -f step-5
-```
-
-The web page updates by itself. Go back to the start with `git checkout -f main`.
-
 ## After the workshop
 
 On Codespaces, stop your codespace to save your free hours: [github.com/codespaces](https://github.com/codespaces) → `...` → **Stop codespace**.

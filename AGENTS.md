@@ -26,4 +26,3 @@ Models
 - One plain-English comment per block, explaining what it does and why.
 - Each step adds exactly one feature. Keep earlier features working. Do not refactor or add error handling beyond what the step needs.
 - To check your work, run `uv run python -m py_compile app.py`. Do not open the page yourself.
-- Reference solutions exist as git tags `step-1` ... `step-11`. Do not read them unless asked.
