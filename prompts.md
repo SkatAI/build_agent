@@ -16,20 +16,28 @@ qwen2.5:3b is a small model. It handles tools well enough for the demos, but it 
 The model is a function: text in, text out. It remembers nothing.
 
 ```text
-Replace app.py with a chat page: a title, st.chat_input, and for each message, send ONLY that message to the model and show the question and the answer with st.chat_message. Stream the answer so it appears as it is written: ollama.chat with stream=True, displayed with st.write_stream. Keep no history.
+Replace app.py with a chat page: a title, st.chat_input, and for each message, send ONLY that message to the model and show the question and the answer with st.chat_message. 
+Stream the answer so it appears as it is written: ollama.chat with stream=True, displayed with st.write_stream. 
+Keep no history.
 ```
 
-Demo: "My name is Alexis." then "What is my name?". It doesn't know, and the previous exchange disappears from the page: Streamlit reruns the whole file for each message.
+**Demo**: "My name is Alexis." then "What is my name?". It doesn't know, and the previous exchange disappears from the page: Streamlit reruns the whole file for each message.
 
 ### Step 2: Conversation history
 
 In-session memory is the harness resending the whole conversation every turn.
 
-```text
-Keep the conversation history in st.session_state.messages: add every user message and model reply, send the full list on each turn, and show the whole conversation on the page. Keep streaming the answer; save the full text returned by st.write_stream as the reply. In the sidebar, show how many messages are sent and their approximate size in tokens (total characters divided by 4).
+```markdown
+Keep the conversation history in `st.session_state.messages`: 
+- add every user message and model reply, 
+- end the full list on each turn, 
+- and show the whole conversation on the page. 
+
+Keep streaming the answer; save the full text returned by `st.write_stream` as the reply. 
+In the sidebar, show how many messages are sent and their approximate size in tokens (total characters divided by 4).
 ```
 
-Demo: the name question now works. Watch the size grow in the sidebar: that is the context window filling up. Reload the page: everything is gone.
+**Demo**: the name question now works. Watch the size grow in the sidebar: that is the context window filling up. Reload the page: everything is gone.
 
 ### Step 3: System prompt
 
